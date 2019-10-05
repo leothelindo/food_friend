@@ -4,6 +4,9 @@ import LoginForm from './LoginForm'
 
 /* renders the main page for the login screen */
 export default class Login extends Component { 
+    static navigationOptions = {
+        title: 'Welcome',
+      };
     render() {
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
