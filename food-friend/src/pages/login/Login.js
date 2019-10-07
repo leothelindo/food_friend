@@ -42,6 +42,9 @@ export default class Login extends Component {
                             onPress={() => this.props.navigation.navigate('Homepage')}>
                                 <Text style={styles.buttonText}>LOGIN</Text>
                         </TouchableOpacity>
+                        <Text onPress={() => this.props.navigation.navigate('Signup')}>
+                            Register
+                        </Text>
                     </View>
                 </View>
             </KeyboardAvoidingView>

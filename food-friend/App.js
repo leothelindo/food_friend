@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import Login from './src/pages/login/Login';
 import Homepage from './src/pages/homepage/Homepage';
+import Signup from './src/pages/signup/Signup';
 
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation'
@@ -14,6 +15,9 @@ const AppNavigator = createStackNavigator(
     }, 
     Homepage:{
       screen: Homepage
+    },
+    Signup:{
+      screen: Signup
     }
   },
   {
