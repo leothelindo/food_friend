@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView, StatusBar } from 'react-native';
 
-/* renders the main page for the login screen */
+/* renders the main page for the signup screen and links to homepage */
 export default class Login extends Component { 
     static navigationOptions = {
         title: 'Welcome',
