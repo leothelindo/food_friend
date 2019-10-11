@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Login from './src/pages/login/Login';
 import Homepage from './src/pages/homepage/Homepage';
 import Signup from './src/pages/signup/Signup';
+import RestaurantDetails from './src/pages/homepage/RestaurantDetails';
 
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation'
@@ -18,8 +19,12 @@ const AppNavigator = createStackNavigator(
     },
     Signup:{
       screen: Signup
+    },
+    Restaurants:{
+      screen: RestaurantDetails
     }
   },
+  
   {
     initialRouteName: 'Home',
   }

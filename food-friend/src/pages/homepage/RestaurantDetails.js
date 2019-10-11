@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions } from 'rea
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
-
+/* displays the restaurant details when you click on the restaurant */
 export default class EventDetail extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
@@ -16,18 +16,12 @@ export default class EventDetail extends React.Component {
         return (
             
             <View style={styles.container}>
-                <Image style={styles.image} source={{ uri: image }} />
+                <Image style={styles.image} source={{uri: 'https://i.huffpost.com/gen/1612634/images/o-MCDONALDS-MEAL-facebook.jpg'}} />
                 <View style={styles.body}>
                     <Text style={styles.info}>FOOD</Text>
                     <Text style={styles.info}>Location:</Text>
                     <Text style={styles.info}>Reviews:</Text>
                 </View>
-                {/* <TouchableOpacity
-                    style={styles.buttonContainer}
-                    onPress={() => this.props.navigation.navigate("Queue")}>
-                    <Text style={styles.buttonText}>Join event and start queuing</Text>
-                </TouchableOpacity> */}
-
             </View>
         );
     }
