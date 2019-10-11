@@ -12,7 +12,7 @@ export default class Login extends Component {
                 <View style={StyleSheet.container} >
                     <View style={StyleSheet.logoContainer}>
                         {/* TODO: Put logo here */}
-                        <Text style={StyleSheet.title} >
+                        <Text style={styles.title} >
                             Welcome to Food Buddy!
                         </Text>
                     </View>
@@ -42,7 +42,7 @@ export default class Login extends Component {
                             onPress={() => this.props.navigation.navigate('Homepage')}>
                                 <Text style={styles.buttonText}>LOGIN</Text>
                         </TouchableOpacity>
-                        <Text onPress={() => this.props.navigation.navigate('Signup')}>
+                        <Text style={{textAlign: "center", marginTop: 10}} onPress={() => this.props.navigation.navigate('Signup')} >
                             Register
                         </Text>
                     </View>
@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
     title: {
         color:'#FFFFFF',
         marginTop: 10,
-        width: 14,
         textAlign: 'center'
     },
     input: {

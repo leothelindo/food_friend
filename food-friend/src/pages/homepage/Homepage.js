@@ -11,6 +11,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 /* renders the Home screen with search bar for the login screen */
 export default class Homepage extends Component {
 
+    
     /* constructs the data that we put in our restaurant list */
     constructor(props) {
         super (props);
@@ -77,6 +78,13 @@ export default class Homepage extends Component {
           </TouchableOpacity>
         )
       }
+
+
+    /*removes back button*/
+    static navigationOptions = {
+        title: 'Restaurants',
+        headerLeft: null
+      };
     
       render() {
         return (

@@ -12,9 +12,6 @@ export default class Login extends Component {
                 <View style={StyleSheet.container} >
                     <View style={StyleSheet.logoContainer}>
                         {/* TODO: Put logo here */}
-                        <Text style={StyleSheet.title} >
-                            Register
-                        </Text>
                     </View>
                     <View style={styles.formContainer}>
                         <StatusBar
