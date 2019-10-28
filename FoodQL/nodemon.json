@@ -1,0 +1,7 @@
+{
+    "env":{
+        "MONGO_USER":"Food-Buddy-Team",
+        "MONGO_PASSWORD":"FoodBuddy1",
+        "MONGO_TABLE": "Users"
+    }
+}
