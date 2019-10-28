@@ -1,21 +1,21 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
-const userSchema = new Schema({
-  name: {
+const orderSchema = new Schema({
+  restaurant: {
     type: String,
     required: true
   },
-  email: {
+  foodItems: {
     type: String,
     required: true
   },
-  password: {
-    type: String,
+  price: {
+    type: Number,
     required: true
   },
-  orders: {
+  creator: {
     type: Schema.Types.ObjectId,
-    ref: "Order"
+    ref: "User"
   }
 });
-export const User = mongoose.model("User", userSchema);
+export const Order = mongoose.model("Order", orderSchema);
