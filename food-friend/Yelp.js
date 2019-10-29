@@ -9,7 +9,7 @@ export async function delSearch(long, lat) {
 
     var key = `iqmcCj-JKZ3r-lU3VOw-WkGWkvJeg52DvrMzf2tmxa83mOaBfs-58OI4If3PMF0oLUwuc9eRkGX-m3SpEoV-CizA1VGPo8BmnYVOPnsj7Fmvy_3YUw_NZ1vNbMOzXXYx`
     try {
-        let response = await fetch(`https://api.yelp.com/v3/businesses/search?term=delivery&latitude=${lat}&longitude=${long}`, 
+        let response = await fetch(`https://api.yelp.com/v3/businesses/search?term=delivery&latitude=${lat}&longitude=${long}&limit=50`, 
         {
         method: 'GET',
         headers: {

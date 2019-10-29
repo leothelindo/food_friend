@@ -41,18 +41,17 @@ export default class Homepage extends Component {
   
       let location = await Location.getCurrentPositionAsync({});
       this.setState({ location : location, longitude : longLat(location)[0], latitude: longLat(location)[1]});
-      
       this.setState({ list: new DataProvider((r1, r2) => r1 !== r2).cloneWithRows(await delSearch(this.state.longitude, this.state.latitude)) })
-      console.log(this.state.list._data[0])
+      console.log(this.state.list._data[19])
     }
   
     componentWillMount() {
       this._getLocationAsync()
       this.layoutProvider = new LayoutProvider((i) => {
-        return this.state.list.getDataForIndex(i).price;
-      }, (price, dim) => {
-        switch (price) {
-          case "$$" || "$" || "$$$" || "$$$$":
+        return this.state.list.getDataForIndex(i).rating;
+      }, (rating, dim) => {
+        switch (rating) {
+          case rating >= 1:
             dim.width = SCREEN_WIDTH;
             dim.height = SCREEN_HEIGHT*.4;
             break;
@@ -66,7 +65,7 @@ export default class Homepage extends Component {
 
 
     /* renders the rows. This is where the styling of the rows will go*/
-    rowRenderer = (type, data) => {
+    rowRenderer = (_price, data) => {
         //const { eventImg, eventName, organizer, location, time } = data.item;
         return (
           <TouchableOpacity style= {styles.listContainer}
@@ -99,10 +98,11 @@ export default class Homepage extends Component {
         
         return (
           <View flex={1}>
-            <View flex= {.08} justifyContent= {"space-evenly"} alignItems= {'center'} flexDirection= {"row"}>
-              <Icon style={styles.toolbar} name={"three-bars"}/>
-              <Text>Hi, Friend</Text>
-              <Icon style={styles.toolbar} name={"search"}/>
+            <View flex= {.08} justifyContent= {"space-between"} alignItems= {'center'} 
+            flexDirection= {"row"} style={{borderBottomWidth: StyleSheet.hairlineWidth}}>
+              <Icon color= {'black'} size={25} name={"three-bars"} style={{marginLeft: 10}}/>
+              <Text style={styles.toolbar}>Hi, Leo</Text>
+              <Icon color= {'black'} size={25} name={"search"} style={{marginRight: 10}}/>
             </View>
             <View flex= {.92}>
             {this.state.list != null ? 
@@ -111,7 +111,7 @@ export default class Homepage extends Component {
               rowRenderer={this.rowRenderer}
               layoutProvider={this.layoutProvider}
               
-            /> : 
+            /> :
             <Text>Loading</Text>
             }
             </View>
@@ -123,7 +123,6 @@ export default class Homepage extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: '#3498db',
         justifyContent: 'center',
     },
     body: {
@@ -144,10 +143,9 @@ const styles = StyleSheet.create({
         opacity: 0.5,
     },
     toolbar: {
-      fontSize: 15,
-      size= 15,
+      fontSize: 20,
       color: "black",
-      fontWeight: 600,
+      fontWeight: '600',
     },
     listContainer: {
       flex: 1,
