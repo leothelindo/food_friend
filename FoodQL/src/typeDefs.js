@@ -1,5 +1,8 @@
 import { gql } from "apollo-server-express";
 
+// defines all the types that graphQL needs to store/use
+// our objects and exports them for other files to use
+
 export const typeDefs = gql`
   type Query {
     helloWorld: String!
@@ -26,6 +29,7 @@ export const typeDefs = gql`
     restaurant: String!
     foodItems: String!
     price: Float!
+    creator: User!
   }
 
   type User {
@@ -33,6 +37,7 @@ export const typeDefs = gql`
     name: String!
     email: String!
     password: String
+    createdOrders: [Order!]
   }
 
   type Mutation {

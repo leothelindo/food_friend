@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
+// defines the schema for a user object and
+// exports a model for it
 const userSchema = new Schema({
   name: {
     type: String,
@@ -13,9 +15,11 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  orders: {
-    type: Schema.Types.ObjectId,
-    ref: "Order"
-  }
+  createdOrders: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Order"
+    }
+  ]
 });
 export const User = mongoose.model("User", userSchema);

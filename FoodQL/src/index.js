@@ -14,6 +14,7 @@ const server = async () => {
   server.applyMiddleware({ app });
 
   try {
+    // connects to our database. This is required to access our backend
     await mongoose.connect(
       `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@foodbuddy-xvz5n.azure.mongodb.net/${process.env.MONGO_TABLE}?retryWrites=true&w=majority`,
       { useNewUrlParser: true, useUnifiedTopology: true }
