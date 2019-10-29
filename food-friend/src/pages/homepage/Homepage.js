@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions, SafeAreaView } from 'react-native';
 import { RecyclerListView, DataProvider, LayoutProvider } from 'recyclerlistview';
+import { longLat, delSearch, formatCategories } from "../../../Yelp"
+import Icon from 'react-native-vector-icons/Octicons';
 import { Ionicons } from '@expo/vector-icons';
 import { Divider } from 'react-native-elements';
+
+import * as Location from 'expo-location';
+import * as Permissions from 'expo-permissions';
 
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -10,69 +15,73 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 /* renders the Home screen with search bar for the login screen */
 export default class Homepage extends Component {
-
     
     /* constructs the data that we put in our restaurant list */
     constructor(props) {
         super (props);
 
-        this.data = [];
-
-        for (i = 0; i < 100; i += 1) {
-            this.data.push({
-              type: 'NORMAL',
-              item: {
-                id: 1,
-                restaurantName: "McDonalds",
-              },
-            });
-          }
-          addEvent = (event) => {
-            i++;
-            this.data.push({
-              type: 'NORMAL',
-              item: {
-                id: 1,
-                restaurantName: "McDonalds",
-              },
-            })
-            
-          }
           this.state = {
-            list: new DataProvider((r1, r2) => r1 !== r2).cloneWithRows(this.data),
+            list: null,
+            location: null,
+            longitude: null,
+            latitude: null
           };
-      
-          this.layoutProvider = new LayoutProvider((i) => {
-            return this.state.list.getDataForIndex(i).type;
-          }, (type, dim) => {
-            switch (type) {
-              case 'NORMAL':
-                dim.width = SCREEN_WIDTH;
-                dim.height = SCREEN_HEIGHT/3;
-                break;
-              default:
-                dim.width = 0;
-                dim.height = 0;
-                break;
-            };
-          })
+
+          this.layoutProvider = null
     }
+
+    // Gets user location and sets state
+    _getLocationAsync = async () => {
+      let { status } = await Permissions.askAsync(Permissions.LOCATION);
+      if (status !== 'granted') {
+        this.setState({
+          errorMessage: 'Permission to access location was denied',
+        });
+      }
+  
+      let location = await Location.getCurrentPositionAsync({});
+      this.setState({ location : location, longitude : longLat(location)[0], latitude: longLat(location)[1]});
+      
+      this.setState({ list: new DataProvider((r1, r2) => r1 !== r2).cloneWithRows(await delSearch(this.state.longitude, this.state.latitude)) })
+      console.log(this.state.list._data[0])
+    }
+  
+    componentWillMount() {
+      this._getLocationAsync()
+      this.layoutProvider = new LayoutProvider((i) => {
+        return this.state.list.getDataForIndex(i).price;
+      }, (price, dim) => {
+        switch (price) {
+          case "$$" || "$" || "$$$" || "$$$$":
+            dim.width = SCREEN_WIDTH;
+            dim.height = SCREEN_HEIGHT*.4;
+            break;
+          default:
+            dim.width = SCREEN_WIDTH;
+            dim.height = SCREEN_HEIGHT*.4;
+            break;
+        };
+      })
+    }
+
 
     /* renders the rows. This is where the styling of the rows will go*/
     rowRenderer = (type, data) => {
-        const { eventImg, eventName, organizer, location, time } = data.item;
+        //const { eventImg, eventName, organizer, location, time } = data.item;
         return (
-          <TouchableOpacity onPress={() => this.props.navigation.navigate(
-            "Restaurants")
+          <TouchableOpacity style= {styles.listContainer}
+          onPress={() => this.props.navigation.navigate(
+            "Restaurants", {business : data})
           }>
-            <View style={styles.listItem}>
-              <Image style={styles.image} source=
-              {{uri: 'https://i.huffpost.com/gen/1612634/images/o-MCDONALDS-MEAL-facebook.jpg'}} />
-              <View style={styles.body}>
-                <Text style={styles.name}>{eventName}</Text>
-                <Text style={styles.info}>Organized by:</Text>
-                <Text style={styles.info}>Where? : </Text>
-                <Text style={styles.info}>When? : {time}</Text>
+            <Image style={styles.image} source=
+              {{uri: data.image_url}} />
+            <View style= {styles.body}>
+              <Text style={styles.name}>{data.name}</Text>
+              <View flexDirection= {'row'}>
+                <Text style={styles.info}>Free Delivery </Text>
+                <Text style={styles.info}> 15-30 mins </Text>
+                <Text style={styles.info}> {data.price} </Text>
+                <Text style={styles.info}> {formatCategories(data.categories)}</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -87,13 +96,25 @@ export default class Homepage extends Component {
       };
     
       render() {
+        
         return (
-          <View style={styles.container}>
+          <View flex={1}>
+            <View flex= {.08} justifyContent= {"space-evenly"} alignItems= {'center'} flexDirection= {"row"}>
+              <Icon style={styles.toolbar} name={"three-bars"}/>
+              <Text>Hi, Friend</Text>
+              <Icon style={styles.toolbar} name={"search"}/>
+            </View>
+            <View flex= {.92}>
+            {this.state.list != null ? 
             <RecyclerListView
-              rowRenderer={this.rowRenderer}
               dataProvider={this.state.list}
+              rowRenderer={this.rowRenderer}
               layoutProvider={this.layoutProvider}
-            />
+              
+            /> : 
+            <Text>Loading</Text>
+            }
+            </View>
           </View>
         );
       }
@@ -106,13 +127,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     body: {
-        marginLeft: 10,
-        marginRight: 10,
-        maxWidth: SCREEN_WIDTH - (80 + 10 + 20),
+        alignSelf: 'flex-start',
+        margin: SCREEN_WIDTH*.05,
     },
     image: {
-        height: 100,
-        width: 100,
+      height: (SCREEN_HEIGHT*.4) *.7,
+      width: SCREEN_WIDTH*.9,
+      resizeMode: 'cover',
     },
     name: {
         fontSize: 20,
@@ -122,9 +143,20 @@ const styles = StyleSheet.create({
         fontSize: 14,
         opacity: 0.5,
     },
-    listItem: {
-        flexDirection: 'row',
-        margin: 10,
+    toolbar: {
+      fontSize: 15,
+      size= 15,
+      color: "black",
+      fontWeight: 600,
+    },
+    listContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      borderColor: 'black',
+      borderRadius: SCREEN_WIDTH*.05,
+      borderBottomWidth: StyleSheet.hairlineWidth,
+      alignItems: 'center',
+      flexDirection: 'column'
     },
     addButton: {
         paddingRight: 11,

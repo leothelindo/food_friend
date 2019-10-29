@@ -1,38 +1,14 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, PermissionsAndroid } from 'react-native';
-
-import Login from './src/pages/login/Login';
-import Homepage from './src/pages/homepage/Homepage';
-import Signup from './src/pages/signup/Signup';
-import RestaurantDetails from './src/pages/homepage/RestaurantDetails';
-
-import { createStackNavigator } from 'react-navigation-stack';
+import { StyleSheet, Text, View, PermissionsAndroid, SafeAreaView } from 'react-native';
 import { createAppContainer } from 'react-navigation'
+import { Navigator } from "./Navigators"
 
 
 
-const AppNavigator = createStackNavigator(
-  {
-    Home: {
-      screen: Login
-    }, 
-    Homepage:{
-      screen: Homepage
-    },
-    Signup:{
-      screen: Signup
-    },
-    Restaurants:{
-      screen: RestaurantDetails
-    }
-  },
-  
-  {
-    initialRouteName: 'Home',
-  }
-);
 
-const AppContainer = createAppContainer(AppNavigator);
+
+
+const AppContainer = createAppContainer(Navigator);
 /* opens the login page when opening the app */
 export default class App extends Component{
   /* for android devices asks for location permission */
@@ -56,7 +32,9 @@ export default class App extends Component{
   }
   render() {
     return (
-      <AppContainer />
+      <SafeAreaView flex= {1}>
+        <AppContainer />
+      </SafeAreaView>
     );
   }
 }

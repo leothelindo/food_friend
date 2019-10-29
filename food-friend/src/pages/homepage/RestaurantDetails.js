@@ -13,14 +13,15 @@ export default class EventDetail extends React.Component {
     };
     render() {
         const { navigation } = this.props;
+        const business = navigation.getParam("business")
         return (
             
             <View style={styles.container}>
-                <Image style={styles.image} source={{uri: 'https://i.huffpost.com/gen/1612634/images/o-MCDONALDS-MEAL-facebook.jpg'}} />
+                <Image style={styles.image} source={{uri: business.image_url}} />
                 <View style={styles.body}>
                     <Text style={styles.info}>FOOD</Text>
                     <Text style={styles.info}>Location:</Text>
-                    <Text style={styles.info}>Reviews:</Text>
+                    <Text style={styles.info}>{business.rating} Stars</Text>
                 </View>
             </View>
         );
