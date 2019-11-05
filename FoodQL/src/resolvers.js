@@ -1,6 +1,7 @@
 import { User } from "./models/user";
 import { Order } from "./models/order";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 // reterns a user object of a given user ID
 const user = async userID => {
@@ -37,6 +38,33 @@ const orders = async orderIds => {
 export const resolvers = {
   Query: {
     users: () => User.find(),
+    
+    login: async (_,args) => {
+        console.log(args);
+        const password = args.password
+        const email = args.email
+
+      const user = await User.findOne({ email: email });
+      if (!user) {
+        throw new Error("User does not exist");
+      }
+      const correctPassword = await bcrypt.compare(password, user.password);
+      if (!correctPassword) {
+        throw new Error("Password is incorrect");
+      }
+      const token = jwt.sign(
+        { userID: user.id, email: user.email },
+        "somesupersecretkey",
+        {
+          expiresIn: "1h"
+        }
+      );
+      return {
+        userID: user.id,
+        token: token,
+        tokenExpiration: 1
+      };
+    },
     orders: () =>
       Order.find()
         .then(orders => {
@@ -77,9 +105,12 @@ export const resolvers = {
         throw err;
       }
     },
-    createOrder: async (_, args) => {
+    createOrder: async (_, args, req) => {
       // hard coded creator id for now.
       // TODO update for actual creator
+      if(!req.isAuth){
+          throw new Error('Unauthorized');
+      }
       const input = {
         restaurant: args.orderInput.restaurant,
         foodItems: args.orderInput.foodItems,

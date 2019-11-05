@@ -8,6 +8,7 @@ export const typeDefs = gql`
     helloWorld: String!
     users: [User!]!
     orders: [Order!]!
+    login(email: String!, password: String!): AuthData!
   }
 
   input UserInput {
@@ -40,6 +41,11 @@ export const typeDefs = gql`
     createdOrders: [Order!]
   }
 
+  type AuthData {
+      userID: ID!
+      token: String!
+      tokenExpiration: Int!
+  }
   type Mutation {
     createUser(userInput: UserInput): User!
     createOrder(orderInput: OrderInput): Order!
