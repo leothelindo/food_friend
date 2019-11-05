@@ -32,9 +32,7 @@ export default class App extends Component{
   }
   render() {
     return (
-      <SafeAreaView flex= {1}>
         <AppContainer />
-      </SafeAreaView>
     );
   }
 }

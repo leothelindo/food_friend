@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions} from 'react-native';
+import { SafeAreaView } from 'react-navigation'
 import { RecyclerListView, DataProvider, LayoutProvider } from 'recyclerlistview';
 import { longLat, delSearch, formatCategories } from "../../../Yelp"
 import Icon from 'react-native-vector-icons/Octicons';
@@ -42,7 +43,7 @@ export default class Homepage extends Component {
       let location = await Location.getCurrentPositionAsync({});
       this.setState({ location : location, longitude : longLat(location)[0], latitude: longLat(location)[1]});
       this.setState({ list: new DataProvider((r1, r2) => r1 !== r2).cloneWithRows(await delSearch(this.state.longitude, this.state.latitude)) })
-      console.log(this.state.list._data[19])
+      //console.log(this.state.list._data[19])
     }
   
     componentWillMount() {
@@ -80,7 +81,7 @@ export default class Homepage extends Component {
                 <Text style={styles.info}>Free Delivery </Text>
                 <Text style={styles.info}> 15-30 mins </Text>
                 <Text style={styles.info}> {data.price} </Text>
-                <Text style={styles.info}> {formatCategories(data.categories)}</Text>
+                <Text style={styles.info}> {formatCategories(data)}</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -97,14 +98,18 @@ export default class Homepage extends Component {
       render() {
         
         return (
-          <View flex={1}>
-            <View flex= {.08} justifyContent= {"space-between"} alignItems= {'center'} 
+          <SafeAreaView flex={1} forceInset= {{bottom: 'never'}}>
+            <View flex= {.05} justifyContent= {"space-between"} alignItems= {'center'} 
             flexDirection= {"row"} style={{borderBottomWidth: StyleSheet.hairlineWidth}}>
-              <Icon color= {'black'} size={25} name={"three-bars"} style={{marginLeft: 10}}/>
+              <TouchableOpacity>
+                <Icon color= {'black'} size={25} name={"three-bars"} style={{marginLeft: 10}}/>
+              </TouchableOpacity>
               <Text style={styles.toolbar}>Hi, Leo</Text>
-              <Icon color= {'black'} size={25} name={"search"} style={{marginRight: 10}}/>
+              <TouchableOpacity>
+                <Icon color= {'black'} size={25} name={"search"} style={{marginRight: 10}}/>
+              </TouchableOpacity>
             </View>
-            <View flex= {.92}>
+            <View flex= {.95}>
             {this.state.list != null ? 
             <RecyclerListView
               dataProvider={this.state.list}
@@ -115,7 +120,7 @@ export default class Homepage extends Component {
             <Text>Loading</Text>
             }
             </View>
-          </View>
+          </SafeAreaView>
         );
       }
 }
@@ -143,7 +148,7 @@ const styles = StyleSheet.create({
         opacity: 0.5,
     },
     toolbar: {
-      fontSize: 20,
+      fontSize: 25,
       color: "black",
       fontWeight: '600',
     },

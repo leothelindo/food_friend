@@ -1,6 +1,8 @@
   
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, ScrollView } from 'react-native';
+import { formatAdress, formatCategories } from "../../../Yelp"
+
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -16,14 +18,15 @@ export default class EventDetail extends React.Component {
         const business = navigation.getParam("business")
         return (
             
-            <View style={styles.container}>
-                <Image style={styles.image} source={{uri: business.image_url}} />
+            <ScrollView style={styles.container} overScrollMode= 'never' alwaysBounceVertical= {false}>
+                <Text>HELLLLOOOO</Text>
+                <Image style={styles.image} source={{uri: business.image_url}} blurRadius= {15}/>
                 <View style={styles.body}>
-                    <Text style={styles.info}>FOOD</Text>
-                    <Text style={styles.info}>Location:</Text>
+                    <Text style={styles.info}>{business.categories[0].title}</Text>
+                    <Text style={styles.info}>{formatAdress(business)}</Text>
                     <Text style={styles.info}>{business.rating} Stars</Text>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }
@@ -43,6 +46,9 @@ const styles = StyleSheet.create({
     image: {
         height: SCREEN_WIDTH,
         width: SCREEN_WIDTH,
+        position: 'absolute',
+        opacity: 400,
+        
     },
     name: {
         fontSize: 20,

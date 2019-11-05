@@ -1,10 +1,11 @@
 import Login from './src/pages/login/Login';
 import Homepage from './src/pages/homepage/Homepage';
-import Signup from './src/pages/signup/Signup';
+import Signup from './src/pages/login/Signup';
 import RestaurantDetails from './src/pages/homepage/RestaurantDetails';
 
 import { createStackNavigator } from 'react-navigation-stack';
 import { createSwitchNavigator } from 'react-navigation'
+import Logo from './src/pages/login/Logo';
 
 const AppNavigator = createStackNavigator(
     {
@@ -19,12 +20,12 @@ const AppNavigator = createStackNavigator(
   
   const AuthNavigator = createStackNavigator(
     {
-      Main: Login,
+      Main: Logo,
       Login: Login,
       Signup: Signup
     },
     {
-      initialRouteName: 'Main',
+      initialRouteName: 'Signup',
       headerMode: 'none'
     }
   );
@@ -35,6 +36,6 @@ const AppNavigator = createStackNavigator(
          App: AppNavigator
      },
      {
-         initialRouteName: 'App'
+         initialRouteName: 'Auth'
      }
   )

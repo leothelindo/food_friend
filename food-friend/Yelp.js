@@ -1,3 +1,4 @@
+//Extracts longitude and latitude from expo Location object 
 export const longLat = (location) => {
     var long = location["coords"].longitude
     var lat = location["coords"].latitude
@@ -24,13 +25,29 @@ export async function delSearch(long, lat) {
         console.log(error)
     }
 }
-export function formatCategories(categories){
 
+//Buisnesses often have multiple categories, this extracts and formats them
+//Returns formatted string of categories to be displayed
+export function formatCategories(busines){
+
+    var categories = busines.categories
     let output = ""
     categories.forEach(element => {
         output += element.title
-        output += " "
+        output += " • "
       });
 
+    return output.substr(0, output.length-3)
+}
+
+//Buisness display adrees is stored as an array, this extracts and formates it
+//Returns a formatted adress string to be displayed
+export function formatAdress(busines){
+    let output = ""
+    var location = busines.location.display_address
+    location.forEach(element => {
+        output += element
+        output += " "
+    })
     return output
 }
