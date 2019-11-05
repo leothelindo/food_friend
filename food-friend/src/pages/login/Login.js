@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView, StatusBar } from 'react-native';
-import queries from "./APIs/graphQL_queries"
 
 /* renders the main page for the login screen */
 export default class Login extends Component { 

@@ -1,7 +1,7 @@
   
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, ScrollView } from 'react-native';
-import { formatAdress, formatCategories } from "../../../Yelp"
+import { formatAdress, formatCategories } from "../APIs/Yelp"
 
 
 const SCREEN_WIDTH = Dimensions.get('window').width;

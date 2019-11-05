@@ -1,4 +1,4 @@
-sendCreateUserQuery = (email, password) => {
+export async function sendCreateUserQuery(email, password) {
   const requestBody = {
     query: `
            mutation {
@@ -12,11 +12,17 @@ sendCreateUserQuery = (email, password) => {
             }
         `
   };
-  fetch("http://localhost:4001/graphql", {
-    method: "POST",
-    body: JSON.stringify(requestBody),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
+  try{
+    await fetch("http://localhost:4001", {
+        method: "POST",
+        body: JSON.stringify(requestBody),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+  }catch(err){
+      console.log(err)
+  }
+ 
+ 
 };

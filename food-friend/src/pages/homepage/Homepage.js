@@ -148,15 +148,9 @@ const styles = StyleSheet.create({
         opacity: 0.5,
     },
     toolbar: {
-<<<<<<< HEAD
       fontSize: 25,
       color: "black",
       fontWeight: '600',
-=======
-      fontSize: 15,
-      color: "black",
-      fontWeight: "600",
->>>>>>> query added
     },
     listContainer: {
       flex: 1,

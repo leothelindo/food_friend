@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView, StatusBar, Dimensions } from 'react-native';
-
+import {sendCreateUserQuery} from '../APIs/graphQL_queries'
 
 
 
@@ -24,6 +24,16 @@ export default class Login extends Component {
     static navigationOptions = {
         title: 'Welcome',
       };
+    onSignUpClickHandler() {
+        try{
+             sendCreateUserQuery(this.state.email, this.state.password)
+            // if(query){
+            //     this.props.navigation.navigate('Homepage')
+            // }
+        } catch(err){
+            throw new Error(err)
+        }
+    }  
     render() {
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -108,14 +118,14 @@ export default class Login extends Component {
                                 returnKeyType='done'
                                 keyboardType='phone-pad'
                                 onChangeText={(text) => this.setState({zipCode : text})}
-                                //onSubmitEditing={() => this.passwordInput.focus()}
+                                onSubmitEditing={()=>this.onSignUpClickHandler()}
                                 autoCorrect={false}
                                 style={[styles.input, {width: Dimensions.get('window').width*.4}]}  
                                 ref={(input) => this.zip = input}  
                                 />
                         </View>
                         <TouchableOpacity style={styles.buttonContainer}
-                            onPress={() => this.props.navigation.navigate('Homepage')}>
+                            onPress={()=>this.onSignUpClickHandler()}>
                                 <Text style={styles.buttonText}>REGISTER</Text>
                         </TouchableOpacity>
                     </View>
