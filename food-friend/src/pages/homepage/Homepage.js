@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions} from 'react-native';
 import { SafeAreaView } from 'react-navigation'
 import { RecyclerListView, DataProvider, LayoutProvider } from 'recyclerlistview';
-import { longLat, delSearch, formatCategories } from "../../../Yelp"
+import { longLat, delSearch, formatCategories } from "../APIs/Yelp"
 import Icon from 'react-native-vector-icons/Octicons';
 import { Ionicons } from '@expo/vector-icons';
 import { Divider } from 'react-native-elements';
@@ -148,9 +148,15 @@ const styles = StyleSheet.create({
         opacity: 0.5,
     },
     toolbar: {
+<<<<<<< HEAD
       fontSize: 25,
       color: "black",
       fontWeight: '600',
+=======
+      fontSize: 15,
+      color: "black",
+      fontWeight: "600",
+>>>>>>> query added
     },
     listContainer: {
       flex: 1,

@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView, StatusBar } from 'react-native';
+import queries from "./APIs/graphQL_queries"
 
 /* renders the main page for the login screen */
 export default class Login extends Component { 
     static navigationOptions = {
         title: 'Welcome',
       };
+    
     render() {
+        console.log(this.state.emailText)
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
                 <View style={StyleSheet.container} >
@@ -23,6 +26,7 @@ export default class Login extends Component {
                         <TextInput 
                             placeholder="username or email"
                             placeholderTextColor="rgba(255,255,255,0.7)"
+                            onChangeText = {(text) => this.setState({emailText : text})}
                             returnKeyType="go"
                             onSubmitEditing={() => this.passwordInput.focus()}
                             keyboardType="email-address"
@@ -33,6 +37,7 @@ export default class Login extends Component {
                         <TextInput 
                             placeholder="password"
                             placeholderTextColor="rgba(255,255,255,0.7)"
+                            onChangeText = {(text) => this.setState({passwordText : text})}
                             returnKeyType="go"
                             secureTextEntry
                             style={styles.input} 
