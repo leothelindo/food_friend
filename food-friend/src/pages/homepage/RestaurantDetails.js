@@ -8,24 +8,33 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 /* displays the restaurant details when you click on the restaurant */
 export default class EventDetail extends React.Component {
+    // This allows the restaurant data to be recieved when clicked
     static navigationOptions = ({ navigation }) => {
         return {
             title: navigation.getParam('restaurantName', 'Your Event'),
         };
     };
+
     render() {
         const { navigation } = this.props;
+        // business is a JSON of data from the restaurant that was clicked in the previous screen
         const business = navigation.getParam("business")
+
         return (
-            
             <ScrollView style={styles.container} overScrollMode= 'never' alwaysBounceVertical= {false}>
-                <Text>HELLLLOOOO</Text>
+                {/* Image at top of screen */}
                 <Image style={styles.image} source={{uri: business.image_url}} blurRadius= {15}/>
+
+                {/* Text and View are the text on image at top of screen */}
+                <Text style={styles.name} numberOfLines= {1}>{business.name}</Text>
                 <View style={styles.body}>
-                    <Text style={styles.info}>{business.categories[0].title}</Text>
-                    <Text style={styles.info}>{formatAdress(business)}</Text>
-                    <Text style={styles.info}>{business.rating} Stars</Text>
+                    <Text style={styles.info} numberOfLines= {1}>{formatAdress(business)}</Text>
+                    <View flexDirection= 'row'>
+                        <Text style={styles.info}>{business.rating}★ • </Text>
+                        <Text style={styles.info}>{business.categories[0].title}</Text>
+                    </View>
                 </View>
+
             </ScrollView>
         );
     }
@@ -39,24 +48,25 @@ const styles = StyleSheet.create({
         minWidth: 1,
     },
     body: {
-        marginLeft: 10,
-        marginRight: 10,
-        maxWidth: SCREEN_WIDTH - (80 + 10 + 20),
+        marginLeft: 30,
+        marginRight: 30,
     },
     image: {
         height: SCREEN_WIDTH,
         width: SCREEN_WIDTH,
-        position: 'absolute',
-        opacity: 400,
-        
+        position: 'relative',
+        opacity: 300,
+        marginBottom: -SCREEN_WIDTH*.25,
     },
     name: {
-        fontSize: 20,
-        fontWeight: 'bold',
+        marginLeft: 10,
+        marginRight: 10,
+        fontSize: SCREEN_WIDTH*.1,
+        color: 'black',
+        fontWeight:  '500',
     },
     info: {
-        fontSize: 20,
-        opacity: 0.5,
+        fontSize: SCREEN_WIDTH*.05,
     },
     listItem: {
         flexDirection: 'row',

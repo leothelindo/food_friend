@@ -25,6 +25,7 @@ export default class Login extends Component {
         title: 'Welcome',
       };
     render() {
+        console.log(this.state.password)
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
                 <View style={StyleSheet.container} >
@@ -59,7 +60,7 @@ export default class Login extends Component {
                         <TextInput 
                             placeholder="Email"
                             placeholderTextColor="rgba(255,255,255,0.7)"
-                            returnKeyType="go"
+                            returnKeyType="next"
                             onSubmitEditing={() => this.username.focus()}
                             onChangeText={(text) => this.setState({email : text})}
                             keyboardType="email-address"
@@ -71,7 +72,7 @@ export default class Login extends Component {
                         <TextInput 
                             placeholder="Username"
                             placeholderTextColor="rgba(255,255,255,0.7)"
-                            returnKeyType="go"
+                            returnKeyType="next"
                             onSubmitEditing={() => this.password.focus()}
                             onChangeText={(text) => this.setState({username : text})}
                             keyboardType="email-address"
@@ -83,7 +84,7 @@ export default class Login extends Component {
                         <TextInput 
                             placeholder="Password"
                             placeholderTextColor="rgba(255,255,255,0.7)"
-                            returnKeyType="go"
+                            returnKeyType="next"
                             onSubmitEditing={() => this.phone.focus()}
                             onChangeText={(text) => this.setState({password : text})}
                             secureTextEntry
@@ -95,7 +96,7 @@ export default class Login extends Component {
                                 placeholder="Phone Number"
                                 placeholderTextColor="rgba(255,255,255,0.7)"
                                 returnKeyType='next'
-                                keyboardType= 'phone-pad'
+                                keyboardType= 'numeric'
                                 onChangeText={(text) => this.setState({phone : text})}
                                 onSubmitEditing={() => this.zip.focus()}
                                 autoCorrect={false}
@@ -105,8 +106,8 @@ export default class Login extends Component {
                             <TextInput 
                                 placeholder="Zip Code"
                                 placeholderTextColor="rgba(255,255,255,0.7)"
-                                returnKeyType='done'
-                                keyboardType='phone-pad'
+                                returnKeyType='go'
+                                keyboardType='decimal-pad'
                                 onChangeText={(text) => this.setState({zipCode : text})}
                                 //onSubmitEditing={() => this.passwordInput.focus()}
                                 autoCorrect={false}
@@ -157,7 +158,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255,0.2)',
         marginBottom: width*.03,
         color:'#FFF',
-        marginHorizontal: width*.03
+        marginHorizontal: width*.03,
+        paddingHorizontal: 10
     },
     buttonContainer: {
         backgroundColor:'#2980b9',

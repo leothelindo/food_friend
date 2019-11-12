@@ -6,7 +6,7 @@ export const longLat = (location) => {
     return [long, lat]
 }
 
-//Searches the Yelp API for businesses near the user with the keyword delivery. 
+//Searches the Yelp API for businesses near the user with the keyword delivery (which is why its named del search). 
 //Returns an array of 50 buisnesses
 export async function delSearch(long, lat) {
 
@@ -46,7 +46,7 @@ export function formatAdress(busines){
     let output = ""
     var location = busines.location.display_address
     location.forEach(element => {
-        output += element
+        output += element.substr(0, element.length-1)
         output += " "
     })
     return output

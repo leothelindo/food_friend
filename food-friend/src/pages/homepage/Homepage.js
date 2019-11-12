@@ -4,8 +4,7 @@ import { SafeAreaView } from 'react-navigation'
 import { RecyclerListView, DataProvider, LayoutProvider } from 'recyclerlistview';
 import { longLat, delSearch, formatCategories } from "../../../Yelp"
 import Icon from 'react-native-vector-icons/Octicons';
-import { Ionicons } from '@expo/vector-icons';
-import { Divider } from 'react-native-elements';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
@@ -31,22 +30,26 @@ export default class Homepage extends Component {
           this.layoutProvider = null
     }
 
-    // Gets user location and sets state
+    // Gets user location and uses that to search Yelp API
     _getLocationAsync = async () => {
+      // Ask for permission for language
       let { status } = await Permissions.askAsync(Permissions.LOCATION);
       if (status !== 'granted') {
         this.setState({
           errorMessage: 'Permission to access location was denied',
         });
       }
-  
+
+      // Get and Set location
       let location = await Location.getCurrentPositionAsync({});
       this.setState({ location : location, longitude : longLat(location)[0], latitude: longLat(location)[1]});
+
+      // Search yelp API 
       this.setState({ list: new DataProvider((r1, r2) => r1 !== r2).cloneWithRows(await delSearch(this.state.longitude, this.state.latitude)) })
-      //console.log(this.state.list._data[19])
     }
   
     componentWillMount() {
+      // Runs at the first render and calls the function for location and search
       this._getLocationAsync()
       this.layoutProvider = new LayoutProvider((i) => {
         return this.state.list.getDataForIndex(i).rating;
@@ -65,11 +68,13 @@ export default class Homepage extends Component {
     }
 
 
-    /* renders the rows. This is where the styling of the rows will go*/
+    // This is where creates the view for the list of resturants on the home page 
+    // It takes in data witch is a fetched list from the Yelp API
     rowRenderer = (_price, data) => {
         //const { eventImg, eventName, organizer, location, time } = data.item;
         return (
           <TouchableOpacity style= {styles.listContainer}
+          //Send info from this tab to other tab
           onPress={() => this.props.navigation.navigate(
             "Restaurants", {business : data})
           }>
@@ -98,7 +103,11 @@ export default class Homepage extends Component {
       render() {
         
         return (
+          // Safe area view helps with screens with notches, such that view doesnt extend over
+          // forceInset allows view to spill over bottom wich is okay because list is scrollable
           <SafeAreaView flex={1} forceInset= {{bottom: 'never'}}>
+
+            {/* This is the view for the toolbar */}
             <View flex= {.05} justifyContent= {"space-between"} alignItems= {'center'} 
             flexDirection= {"row"} style={{borderBottomWidth: StyleSheet.hairlineWidth}}>
               <TouchableOpacity>
@@ -109,17 +118,19 @@ export default class Homepage extends Component {
                 <Icon color= {'black'} size={25} name={"search"} style={{marginRight: 10}}/>
               </TouchableOpacity>
             </View>
+
+            {/* This is the view for the list of restaurants if API is loaded or loading text otherwise */}
             <View flex= {.95}>
             {this.state.list != null ? 
             <RecyclerListView
               dataProvider={this.state.list}
               rowRenderer={this.rowRenderer}
               layoutProvider={this.layoutProvider}
-              
             /> :
             <Text>Loading</Text>
             }
             </View>
+            
           </SafeAreaView>
         );
       }
