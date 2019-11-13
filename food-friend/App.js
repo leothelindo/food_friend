@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, PermissionsAndroid, SafeAreaView } from 'react-native';
 import { createAppContainer } from 'react-navigation'
-import { Navigator } from "./Navigators"
+import { Navigator } from "./src/navigation/Navigators"
 
 
 

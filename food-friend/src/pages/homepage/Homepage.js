@@ -4,7 +4,6 @@ import { SafeAreaView } from 'react-navigation'
 import { RecyclerListView, DataProvider, LayoutProvider } from 'recyclerlistview';
 import { longLat, delSearch, formatCategories } from "../../../Yelp"
 import Icon from 'react-native-vector-icons/Octicons';
-import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
@@ -68,7 +67,7 @@ export default class Homepage extends Component {
     }
 
 
-    // This is where creates the view for the list of resturants on the home page 
+    // This creates the view for the list of resturants on the home page 
     // It takes in data witch is a fetched list from the Yelp API
     rowRenderer = (_price, data) => {
         //const { eventImg, eventName, organizer, location, time } = data.item;
