@@ -4,7 +4,6 @@ import Signup from '../pages/login/Signup';
 import RestaurantDetails from '../pages/homepage/RestaurantDetails';
 
 import { createStackNavigator } from 'react-navigation-stack';
-import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createSwitchNavigator } from 'react-navigation'
 import Logo from '../pages/login/Logo';
 
@@ -35,7 +34,6 @@ const AuthNavigator = createStackNavigator(
   );
 
 // TODO: Create App Drawer by updating DrawerNavigatorConfig
-export const DrawerNavigator = createDrawerNavigator(AppNavigator, DrawerNavigatorConfig);
   
 // The main navigator that switches been auth and main stacks
 // This ensures that once you switch from log in to main you can switch back without data transfering 
