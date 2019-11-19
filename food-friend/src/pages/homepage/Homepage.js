@@ -96,7 +96,7 @@ export default class Homepage extends Component {
     /*removes back button*/
     static navigationOptions = {
         title: 'Restaurants',
-        headerLeft: null
+        headerLeft: null,
       };
     
       render() {
@@ -108,7 +108,8 @@ export default class Homepage extends Component {
 
             {/* This is the view for the toolbar */}
             <View flex= {.05} justifyContent= {"space-between"} alignItems= {'center'} 
-            flexDirection= {"row"} style={{borderBottomWidth: StyleSheet.hairlineWidth}}>
+            flexDirection= {"row"} style={{borderBottomWidth: StyleSheet.hairlineWidth,
+              paddingTop: Expo.Constants.statusBarHeight}}>
               <TouchableOpacity>
                 <Icon color= {'black'} size={25} name={"three-bars"} style={{marginLeft: 10}}/>
               </TouchableOpacity>
@@ -116,6 +117,7 @@ export default class Homepage extends Component {
               <TouchableOpacity>
                 <Icon color= {'black'} size={25} name={"search"} style={{marginRight: 10}}/>
               </TouchableOpacity>
+              
             </View>
 
             {/* This is the view for the list of restaurants if API is loaded or loading text otherwise */}

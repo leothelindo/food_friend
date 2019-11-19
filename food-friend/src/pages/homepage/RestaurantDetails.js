@@ -40,7 +40,7 @@ order = [
         id: 2
     },
     {
-        name: 'Chicken Sandwhich',
+        name: 'Chicken Sandwich',
         price: '4.50',
         description: '100% white meat chicken, tomatoes, lettuce',
         id: 3
