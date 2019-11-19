@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import { ApolloServer, gql } from "apollo-server-express";
 import { resolvers } from "./resolvers";
 import { typeDefs } from "./typeDefs";
+import cors from "cors";
 
 const server = async () => {
   const app = express();
@@ -10,7 +11,7 @@ const server = async () => {
     typeDefs,
     resolvers
   });
-
+  app.use(cors())
   server.applyMiddleware({ app });
 
   try {
@@ -23,7 +24,7 @@ const server = async () => {
     console.log(err);
   }
 
-  app.listen({ port: 4001 }, () => {
+  app.listen({ port: 4000 }, () => {
     console.log("connected");
   });
 };
