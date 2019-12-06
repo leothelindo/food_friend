@@ -8,7 +8,9 @@ import {
   View,
   KeyboardAvoidingView,
   StatusBar,
-  Dimensions
+  Dimensions,
+  Image,
+  elevation
 } from "react-native";
 
 import { sendCreateUserQuery } from "../APIs/graphQL_queries";
@@ -58,7 +60,17 @@ export default class Login extends Component {
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={StyleSheet.container}>
           <View style={StyleSheet.logoContainer}>
-            {/* TODO: Put logo here */}
+            <Image 
+              source={require('./logo.png')}
+              style={{alignSelf: "center", width:100, height:100,
+              shadowColor: "#000",
+              shadowOffset: {
+                width: 0,
+                height: 12,
+              },
+              shadowOpacity: 0.58,
+              shadowRadius: 16.00}}
+            />
           </View>
 
           <View style={styles.formContainer}>
@@ -66,7 +78,7 @@ export default class Login extends Component {
 
             <View flexDirection="row">
               <TextInput
-                placeholder="First Name"
+                placeholder=" First Name"
                 placeholderTextColor="rgba(255,255,255,0.7)"
                 returnKeyType="next"
                 onSubmitEditing={() => this.lastName.focus()}
@@ -79,7 +91,7 @@ export default class Login extends Component {
               />
 
               <TextInput
-                placeholder="Last Name"
+                placeholder=" Last Name"
                 placeholderTextColor="rgba(255,255,255,0.7)"
                 returnKeyType="next"
                 onSubmitEditing={() => this.email.focus()}
@@ -94,7 +106,7 @@ export default class Login extends Component {
             </View>
 
             <TextInput
-              placeholder="Email"
+              placeholder=" Email"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="go"
               onSubmitEditing={() => this.username.focus()}
@@ -107,7 +119,7 @@ export default class Login extends Component {
             />
 
             <TextInput
-              placeholder="Username"
+              placeholder=" Username"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="go"
               onSubmitEditing={() => this.password.focus()}
@@ -120,7 +132,7 @@ export default class Login extends Component {
             />
 
             <TextInput
-              placeholder="Password"
+              placeholder=" Password"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="go"
               onSubmitEditing={() => this.phone.focus()}
@@ -132,7 +144,7 @@ export default class Login extends Component {
 
             <View flexDirection="row">
               <TextInput
-                placeholder="Phone Number"
+                placeholder=" Phone Number"
                 placeholderTextColor="rgba(255,255,255,0.7)"
                 returnKeyType="next"
                 keyboardType="phone-pad"
@@ -147,7 +159,7 @@ export default class Login extends Component {
               />
 
               <TextInput
-                placeholder="Zip Code"
+                placeholder=" Zip Code"
                 placeholderTextColor="rgba(255,255,255,0.7)"
                 returnKeyType="done"
                 keyboardType="phone-pad"
@@ -189,7 +201,9 @@ const styles = StyleSheet.create({
 
     flexGrow: 1,
 
-    justifyContent: "center"
+    justifyContent: "center",
+
+    elevation:24
   },
 
   logo: {
