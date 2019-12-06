@@ -8,18 +8,20 @@ export const longLat = (location) => {
 
 //Searches the Yelp API for businesses near the user with the keyword delivery (which is why its named del search). 
 //Returns an array of 50 buisnesses
-export async function delSearch(long, lat) {
+export async function delSearch(long, lat, str) {
 
     var key = `iqmcCj-JKZ3r-lU3VOw-WkGWkvJeg52DvrMzf2tmxa83mOaBfs-58OI4If3PMF0oLUwuc9eRkGX-m3SpEoV-CizA1VGPo8BmnYVOPnsj7Fmvy_3YUw_NZ1vNbMOzXXYx`
     try {
-        let response = await fetch(`https://api.yelp.com/v3/businesses/search?term=delivery&latitude=${lat}&longitude=${long}&limit=50`, 
+        let search = "delivery "+str;
+        let response = await fetch(`https://api.yelp.com/v3/businesses/search?term=${search}&latitude=${lat}&longitude=${long}&limit=50`, 
         {
         method: 'GET',
         headers: {
           Authorization: "Bearer " + key
-        }})
+        }}) 
         let responseJson = await response.json()
         return responseJson.businesses;
+    
     }
     catch (error) {
         console.log(error)

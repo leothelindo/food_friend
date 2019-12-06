@@ -44,13 +44,10 @@ export default class Login extends Component {
 
   onSignUpClickHandler() {
     try {
-      sendCreateUserQuery(this.state.firstName, this.state.email, this.state.password);
-
-      // if(query){
-
-      //     this.props.navigation.navigate('Homepage')
-
-      // }
+      //sendCreateUserQuery(this.state.firstName, this.state.email, this.state.password);
+      console.log(this.state.firstName)
+      this.props.navigation.navigate(
+        "Homepage", {name: this.state.firstName})
     } catch (err) {
       throw new Error(err);
     }
