@@ -41,7 +41,6 @@ export default class Homepage extends Component {
   updateSearch = async search => {
     this.setState({ search });
     this.setState({ list: new DataProvider((r1, r2) => r1 !== r2).cloneWithRows(await delSearch(this.state.longitude, this.state.latitude, search)) })
-    console.log(this.state.search);
   };
 
   // Gets user location and uses that to search Yelp API
