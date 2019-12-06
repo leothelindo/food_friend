@@ -12,29 +12,29 @@ order = [
     {
         name: 'Uber Eats',
         image: require('./uber.png'),
-        price: '5.00',
-        description: '100% all beef patty, sesame bun, tomatoes, lettuce',
+        price: '3.00',
+        description: 'Estimated delivery cost based on service fees and delivery charges',
         id: 1
     },
     {
         name: 'Postmates',
         image: require('./postmates.png'),
-        price: '5.50',
-        description: '100% all beef patty, cheese, sesame bun, tomatoes, lettuce',
+        price: 'Unavailable',
+        description: 'Estimated delivery cost based on service fees and delivery charges',
         id: 2
     },
     {
         name: 'Grubhub',
         image: require('./grubhub.png'),
-        price: '10.50',
-        description: '100% white meat chicken, fries',
+        price: '5.50',
+        description: 'Estimated delivery cost based on service fees and delivery charges',
         id: 3
     },
     {
         name: 'Door Dash',
         image: require('./doordash.png'),
         price: '7.50',
-        description: '2 100% all beef patties, sesame bun, tomatoes, lettuce',
+        description: 'Estimated delivery cost based on service fees and delivery charges',
         id: 1
     }
 ]
