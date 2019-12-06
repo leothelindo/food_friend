@@ -39,6 +39,7 @@ export default class Homepage extends Component {
   }
 
   updateSearch = async search => {
+    this.setState({list:null})
     this.setState({ search });
     this.setState({ list: new DataProvider((r1, r2) => r1 !== r2).cloneWithRows(await delSearch(this.state.longitude, this.state.latitude, search)) })
   };
@@ -55,8 +56,8 @@ export default class Homepage extends Component {
 
     // Get and Set location
     let location = await Location.getCurrentPositionAsync({});
+  
     this.setState({ location: location, longitude: longLat(location)[0], latitude: longLat(location)[1] });
-
     // Search yelp API 
     this.setState({ list: new DataProvider((r1, r2) => r1 !== r2).cloneWithRows(await delSearch(this.state.longitude, this.state.latitude, "")) })
   }
@@ -107,8 +108,8 @@ export default class Homepage extends Component {
   }
 
   ShowHideTextComponentView = async () => {
-
-    if (this.state.showGreeting == true) {
+    this.setState({list:null})
+    if (this.state.showGreeting) {
       this.setState({ showGreeting: false, showSearch: true })
     }
     else {
