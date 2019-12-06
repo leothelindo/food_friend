@@ -8,7 +8,9 @@ import {
   View,
   KeyboardAvoidingView,
   StatusBar,
-  Dimensions
+  Dimensions,
+  Image,
+  elevation
 } from "react-native";
 
 import { sendCreateUserQuery } from "../APIs/graphQL_queries";
@@ -61,7 +63,17 @@ export default class Login extends Component {
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={StyleSheet.container}>
           <View style={StyleSheet.logoContainer}>
-            {/* TODO: Put logo here */}
+            <Image 
+              source={require('./logo.png')}
+              style={{alignSelf: "center", width:100, height:100,
+              shadowColor: "#000",
+              shadowOffset: {
+                width: 0,
+                height: 12,
+              },
+              shadowOpacity: 0.58,
+              shadowRadius: 16.00}}
+            />
           </View>
 
           <View style={styles.formContainer}>
@@ -192,7 +204,9 @@ const styles = StyleSheet.create({
 
     flexGrow: 1,
 
-    justifyContent: "center"
+    justifyContent: "center",
+
+    elevation:24
   },
 
   logo: {
