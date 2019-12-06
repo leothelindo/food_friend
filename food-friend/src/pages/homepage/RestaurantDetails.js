@@ -10,40 +10,32 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 order = [
     {
-        name: 'Hamburger',
-        price: '5.00',
-        description: '100% all beef patty, sesame bun, tomatoes, lettuce',
+        name: 'Uber Eats',
+        image: require('./uber.png'),
+        price: '3.00',
+        description: 'Estimated delivery cost based on service fees and delivery charges',
         id: 1
     },
     {
-        name: 'Cheesburger',
+        name: 'Postmates',
+        image: require('./postmates.png'),
+        price: 'Unavailable',
+        description: 'Estimated delivery cost based on service fees and delivery charges',
+        id: 2
+    },
+    {
+        name: 'Grubhub',
+        image: require('./grubhub.png'),
         price: '5.50',
-        description: '100% all beef patty, cheese, sesame bun, tomatoes, lettuce',
-        id: 2
-    },
-    {
-        name: 'Chicken Fingers',
-        price: '10.50',
-        description: '100% white meat chicken, fries',
+        description: 'Estimated delivery cost based on service fees and delivery charges',
         id: 3
     },
     {
-        name: 'Double Double',
+        name: 'Door Dash',
+        image: require('./doordash.png'),
         price: '7.50',
-        description: '2 100% all beef patties, sesame bun, tomatoes, lettuce',
+        description: 'Estimated delivery cost based on service fees and delivery charges',
         id: 1
-    },
-    {
-        name: '5X5 Monster',
-        price: '20.00',
-        description: ' 5 100% all beef patties, 5 thick slices of american cheese, 10 sesame buns, tomatoes, lettuce',
-        id: 2
-    },
-    {
-        name: 'Chicken Sandwich',
-        price: '4.50',
-        description: '100% white meat chicken, tomatoes, lettuce',
-        id: 3
     }
 ]
 
@@ -68,9 +60,9 @@ export default class EventDetail extends React.Component {
         //const { eventImg, eventName, organizer, location, time } = data.item;
         return (
           <TouchableOpacity style= {styles.listContainer}>
-              <View style= {{height: SCREEN_WIDTH*.15, width: SCREEN_WIDTH*.15, backgroundColor: 'grey'}} >
-                  <Text style= {{fontSize: 20, alignSelf: 'center'}}> Insert Image</Text>
-              </View>
+            <Image 
+                source={data.image}
+                style={{alignSelf: "center", width:75, height:75, resizeMode: 'contain'}} />
             <View style= {styles.orderBody}>
                 <View flexDirection= 'row' justifyContent= 'space-between'>
                     <Text style={styles.orderName}>{data.name}</Text>
