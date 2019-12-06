@@ -10,7 +10,6 @@ import {
   StatusBar,
   Dimensions,
   Image,
-  elevation
 } from "react-native";
 
 import { sendCreateUserQuery } from "../APIs/graphQL_queries";
@@ -46,10 +45,13 @@ export default class Login extends Component {
 
   onSignUpClickHandler() {
     try {
-      //sendCreateUserQuery(this.state.firstName, this.state.email, this.state.password);
-      console.log(this.state.firstName)
-      this.props.navigation.navigate(
-        "Homepage", {name: this.state.firstName})
+      sendCreateUserQuery(this.state.firstName, this.state.email, this.state.password);
+
+      // if(query){
+
+      //     this.props.navigation.navigate('Homepage')
+
+      // }
     } catch (err) {
       throw new Error(err);
     }
@@ -66,10 +68,10 @@ export default class Login extends Component {
               shadowColor: "#000",
               shadowOffset: {
                 width: 0,
-                height: 12,
+                height: 2,
               },
-              shadowOpacity: 0.58,
-              shadowRadius: 16.00}}
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84}}
             />
           </View>
 
@@ -203,7 +205,7 @@ const styles = StyleSheet.create({
 
     justifyContent: "center",
 
-    elevation:24
+    elevation:5
   },
 
   logo: {
