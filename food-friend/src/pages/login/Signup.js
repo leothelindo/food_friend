@@ -66,7 +66,7 @@ export default class Login extends Component {
 
             <View flexDirection="row">
               <TextInput
-                placeholder="First Name"
+                placeholder=" First Name"
                 placeholderTextColor="rgba(255,255,255,0.7)"
                 returnKeyType="next"
                 onSubmitEditing={() => this.lastName.focus()}
@@ -79,7 +79,7 @@ export default class Login extends Component {
               />
 
               <TextInput
-                placeholder="Last Name"
+                placeholder=" Last Name"
                 placeholderTextColor="rgba(255,255,255,0.7)"
                 returnKeyType="next"
                 onSubmitEditing={() => this.email.focus()}
@@ -94,7 +94,7 @@ export default class Login extends Component {
             </View>
 
             <TextInput
-              placeholder="Email"
+              placeholder=" Email"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="go"
               onSubmitEditing={() => this.username.focus()}
@@ -107,7 +107,7 @@ export default class Login extends Component {
             />
 
             <TextInput
-              placeholder="Username"
+              placeholder=" Username"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="go"
               onSubmitEditing={() => this.password.focus()}
@@ -120,7 +120,7 @@ export default class Login extends Component {
             />
 
             <TextInput
-              placeholder="Password"
+              placeholder=" Password"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="go"
               onSubmitEditing={() => this.phone.focus()}
@@ -132,7 +132,7 @@ export default class Login extends Component {
 
             <View flexDirection="row">
               <TextInput
-                placeholder="Phone Number"
+                placeholder=" Phone Number"
                 placeholderTextColor="rgba(255,255,255,0.7)"
                 returnKeyType="next"
                 keyboardType="phone-pad"
@@ -147,7 +147,7 @@ export default class Login extends Component {
               />
 
               <TextInput
-                placeholder="Zip Code"
+                placeholder=" Zip Code"
                 placeholderTextColor="rgba(255,255,255,0.7)"
                 returnKeyType="done"
                 keyboardType="phone-pad"
