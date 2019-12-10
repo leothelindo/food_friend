@@ -56,8 +56,8 @@ export default class EventDetail extends React.Component {
 
     
     // This creates the view for the list of order on the home page 
+    // renders the image of delivery service with name and price
     rowRenderer = (data) => {
-        //const { eventImg, eventName, organizer, location, time } = data.item;
         return (
           <TouchableOpacity style= {styles.listContainer}>
             <Image 

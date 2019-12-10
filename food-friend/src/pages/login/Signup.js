@@ -57,6 +57,7 @@ export default class Login extends Component {
     }
   }
 
+  // renders our sign up sheet as well as the logo
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
